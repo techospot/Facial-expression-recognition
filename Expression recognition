@@ -1,0 +1,27 @@
+# Suppress deprecation warnings
+import warnings
+warnings.filterwarnings('ignore', category=DeprecationWarning)
+
+import tensorflow as tf
+tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)  # Updated to use tf.compat.v1
+
+# Import the required modules
+import cv2
+import matplotlib.pyplot as plt
+from deepface import DeepFace
+
+# Read the image
+img = cv2.imread(r'image.jpg')
+
+# Convert BGR image to RGB
+img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+# Display the image using matplotlib
+plt.imshow(img_rgb)
+plt.show()
+
+# Analyze the image for emotions
+result = DeepFace.analyze(img_rgb, actions=['emotion'])
+
+# Print the result
+print(result)
